@@ -1,0 +1,145 @@
+<div class="container auth">
+    <form>
+        <div id="big-form" style="margin-bottom: 10px" class="well auth-box">
+
+            <div ng-show="players.length == 0">
+                <label class="control-label" for="selectbasic">Dear Admin, Please create playing today.</label>
+            </div>
+
+            <div ng-hide="captain1Selected">
+                <div class="form-group">
+                    <label class="control-label" for="selectbasic">Select Captain1</label>
+
+                    <div class="">
+                        <select id="selectbasic" name="selectbasic" class="form-control" ng-model="captain1"
+                                ng-options="player.name for player in players"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="">
+                        <button id="singlebutton" name="singlebutton"
+                                ng-click="captain1Selected=true;homeModels.lists.A.label=captain1.name"
+                                class="btn btn-default">Continue
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="captain1Selected" class="form-group">
+                <label class="control-label" for="textinput">Selected Captain1: </label>
+                <label class="control-label">{{captain1.name}}</label>
+            </div>
+
+
+
+            <div ng-show="captain1Selected && !captain2Selected">
+                <div class="form-group">
+                    <label class="control-label" for="selectbasic">Select Captain2</label>
+
+                    <div class="">
+                        <select id="selectbasic2" name="selectbasic" class="form-control" ng-model="captain2"
+                                ng-options="player.name for player in players"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="">
+                        <button id="singlebutton2" name="singlebutton"
+                                ng-click="captain2Selected=true;homeModels.lists.B.label=captain2.name"
+                                class="btn btn-default">Continue
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="captain2Selected" class="form-group">
+                <label class="control-label" for="textinput">Selected Captain2:</label>
+                <label class="control-label">{{captain2.name}}</label>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+<div ng-show="captain1Selected && captain2Selected" class="container">
+
+    <div class="simpleDemo row">
+        <div class="col-md-6">
+            <div class="card">
+                <div id="{{homeModels.lists.Today.label}}" class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{homeModels.lists.Today.label}} Team</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul style="min-height: 42px;" dnd-list="homeModels.lists.Today.value">
+                            <li ng-repeat="item in homeModels.lists.Today.value"
+                                dnd-draggable="item"
+                                dnd-moved="homeModels.lists.Today.value.splice($index, 1)"
+                                dnd-effect-allowed="move"
+                                dnd-selected="homeModels.selected = item"
+                                ng-class="{'selected': homeModels.selected === item}">
+                                {{item.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div id="{{homeModels.lists.A.label}}" class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{homeModels.lists.A.label}} Team</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul style="min-height: 42px;" dnd-list="homeModels.lists.A.value">
+                            <li ng-repeat="item in homeModels.lists.A.value"
+                                dnd-draggable="item"
+                                dnd-moved="homeModels.lists.A.value.splice($index, 1)"
+                                dnd-effect-allowed="move"
+                                dnd-selected="homeModels.selected = item"
+                                ng-class="{'selected': homeModels.selected === item}">
+                                {{item.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div id="{{homeModels.lists.B.label}}" class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{homeModels.lists.B.label}} Team</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul style="min-height: 42px;" dnd-list="homeModels.lists.B.value">
+                            <li ng-repeat="item in homeModels.lists.B.value"
+                                dnd-draggable="item"
+                                dnd-moved="homeModels.lists.B.value.splice($index, 1)"
+                                dnd-effect-allowed="move"
+                                dnd-selected="homeModels.selected = item"
+                                ng-class="{'selected': homeModels.selected === item}">
+                                {{item.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-4 col-md-offset-4">
+            <div class="">
+                <button id="button1id" name="button1id" ng-disabled="homeModels.lists.Today.value.length !== 0"
+                        ng-click="printTeams()" class="btn btn-danger">Print Teams Button
+                </button>
+                <button id="button2id" name="button2id" ng-disabled="homeModels.lists.Today.value.length !== 0"
+                        ng-click="sendSMS()" class="btn btn-danger">Send Teams As SMS
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

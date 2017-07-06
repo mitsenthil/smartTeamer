@@ -1,0 +1,92 @@
+<div class="container auth">
+    <form>
+        <div id="big-form" style="margin-bottom: 10px" class="well auth-box">
+            <legend>Create player</legend>
+            <div class="form-group">
+                <label class=" control-label" for="playername">Player Name</label>
+
+                <div class="">
+                    <input id="playername" name="playername" placeholder="Player Name" ng-model="formData.name" class="form-control input-md"
+                           type="text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class=" control-label" for="playerpoint">Point</label>
+
+                <div class="">
+                    <input id="playerpoint" name="playerpoint" placeholder="Point" ng-model="formData.point"
+                           class="form-control input-md" type="number">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="">
+                    <button id="singlebutton" name="singlebutton" ng-click="createPlayer()" class="btn btn-default">Add
+                        Player to Squad
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+<div class="simpleDemo row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{models.lists.Squad.label}}</h3>
+                </div>
+                <div class="panel-body">
+                    <ul style="min-height: 42px;" dnd-list="models.lists.Squad.value">
+                        <li ng-repeat="item in models.lists.Squad.value"
+                            dnd-draggable="item"
+                            dnd-moved="models.lists.Squad.value.splice($index, 1)"
+                            dnd-effect-allowed="move"
+                            dnd-selected="models.selected = item"
+                            ng-class="{'selected': models.selected === item}">
+                            {{item.name}} <a style="float: right" ng-click="deletePlayer(item.id)"><span class="glyphicon glyphicon-trash"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{models.lists.Today.label}}</h3>
+                </div>
+                <div class="panel-body">
+                    <ul style="min-height: 42px;" dnd-list="models.lists.Today.value">
+                        <li ng-repeat="item in models.lists.Today.value"
+                            dnd-draggable="item"
+                            dnd-moved="models.lists.Today.value.splice($index, 1)"
+                            dnd-effect-allowed="move"
+                            dnd-selected="models.selected = item"
+                            ng-class="{'selected': models.selected === item}">
+                            {{item.name}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4 col-md-offset-4">
+        <div class="">
+            <button id="button2id" name="button2id" ng-click="createPlayingToday()" class="btn btn-danger">Create Playing Today
+            </button>
+            <button id="button1id" name="button1id" ng-click="reload()" class="btn btn-danger">Reset
+            </button>
+        </div>
+    </div>
+</div>

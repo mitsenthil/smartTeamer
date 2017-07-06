@@ -1,0 +1,4 @@
+# smartTeamer
+
+
+mongod --dbpath mongodb/
